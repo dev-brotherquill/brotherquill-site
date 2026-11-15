@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brother Quill — A focus timer for Christians</title>
+<meta name="description" content="Brother Quill is an iPhone focus timer for Christians. While you focus, a monk copies Scripture letter by letter, adding a few verses to your Bible each session. Launching December 2026.">
+<link rel="canonical" href="https://brotherquill.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brotherquill.com/">
+<meta property="og:title" content="Brother Quill — A focus timer for Christians">
+<meta property="og:description" content="Focus for 25 minutes. That&rsquo;s 25 minutes of Scripture, copied letter by letter. Join the waitlist.">
+<meta property="og:image" content="https://brotherquill.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A manuscript page of Genesis 1, stopped mid-word with a quill, a 24:15 timer, and the words Brother Quill.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://brotherquill.com/#org",
+   "name": "Strength Theory, LLC",
+   "url": "https://brotherquill.com/",
+   "email": "hello@brotherquill.com"
+  },
+  {
+   "@type": "MobileApplication",
+   "name": "Brother Quill",
+   "url": "https://brotherquill.com/",
+   "description": "An iPhone focus timer for Christians. While you focus, a monk copies Scripture letter by letter at 68 characters a minute, adding a few verses to your Bible each session.",
+   "operatingSystem": "iOS",
+   "applicationCategory": "ProductivityApplication",
+   "inLanguage": "en",
+   "countriesSupported": "US, CA, AU, NZ",
+   "featureList": [
+    "Focus timer",
+    "Scripture copied at 68 characters a minute",
+    "King James Version",
+    "Berean Standard Bible",
+    "Douay-Rheims Bible (1899)",
+    "World English Bible, Catholic Edition"
+   ],
+   "image": "https://brotherquill.com/og.png",
+   "publisher": {
+    "@id": "https://brotherquill.com/#org"
+   },
+   "offers": [
+    {
+     "@type": "Offer",
+     "name": "Yearly",
+     "price": "19.99",
+     "priceCurrency": "USD",
+     "description": "Free for 7 days, then $19.99 a year."
+    },
+    {
+     "@type": "Offer",
+     "name": "Monthly",
+     "price": "2.99",
+     "priceCurrency": "USD",
+     "description": "$2.99 a month, with no free trial."
+    }
+   ]
+  }
+ ]
+}
+</script>
+<meta name="theme-color" content="#fbf9f4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f7eedb'/%3E%3Cpath d='M48 8C30 14 20 30 17 50l4 1c3-9 8-17 14-23-4 7-7 15-8 23 13-8 21-24 21-43z' fill='%232b2118'/%3E%3Cpath d='M12 56h26' stroke='%239b2c1f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf9f4;
+    --bg-deep: #f3efe7;
+    --page: #fffdf9;
+    --parchment: #f7eedb;
+    --parchment-rule: #e2d3b1;
+    --ink: #231c15;
+    --ink-soft: #5e554a;
+    --rule: #e6e0d4;
+    --rubric: #9b2c1f;
+    --gold: #a0782f;
+    --btn-text: #fbf9f4;
+    --shadow: 0 1px 0 rgba(35,28,21,.05), 0 12px 32px -14px rgba(35,28,21,.18);
+    --quill-light: #efe2c4; --quill-shade: #d2bc8c; --quill-line: #6b5a3e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171615;
+      --bg-deep: #1d1c1a;
+      --page: #22211f;
+      --parchment: #29241d;
+      --parchment-rule: #463e33;
+      --ink: #eeeae3;
+      --ink-soft: #a9a49c;
+      --rule: #353330;
+      --rubric: #d9705e;
+      --gold: #cba663;
+      --btn-text: #171615;
+      --shadow: 0 12px 32px -12px rgba(0,0,0,.6);
+      --quill-light: #e9e0cc; --quill-shade: #c9b994; --quill-line: #8f7d5c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171615; --bg-deep: #1d1c1a; --page: #22211f; --parchment: #29241d; --parchment-rule: #463e33; --ink: #eeeae3;
+    --ink-soft: #a9a49c; --rule: #353330; --rubric: #d9705e; --gold: #cba663;
+    --btn-text: #171615; --shadow: 0 12px 32px -12px rgba(0,0,0,.6);
+    --quill-light: #e9e0cc; --quill-shade: #c9b994; --quill-line: #8f7d5c;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header { padding: 22px 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .wordmark { font-size: 24px; font-weight: 600; letter-spacing: .02em; text-decoration: none; }
+  .wordmark span { color: var(--rubric); }
+  .nav-cta { font-size: 17px; text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
+  .nav-cta:hover { border-color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 48px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .eyebrow { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric); margin: 0 0 18px; font-weight: 500; }
+  h1 { font-size: clamp(38px, 5.2vw, 58px); line-height: 1.08; font-weight: 500; margin: 0 0 22px; letter-spacing: -.01em; }
+  .sub { font-size: 22px; color: var(--ink-soft); margin: 0 0 32px; max-width: 30em; }
+  .btn {
+    display: inline-block; background: var(--ink); color: var(--btn-text);
+    font: inherit; font-size: 19px; font-weight: 500; text-decoration: none;
+    padding: 14px 26px; border-radius: 4px; border: 0; cursor: pointer;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn:hover { background: var(--rubric); transform: translateY(-1px); }
+  .launch-note { display: block; margin-top: 14px; font-size: 16px; color: var(--ink-soft); font-style: italic; }
+
+  /* Manuscript demo */
+  .folio {
+    background: var(--parchment);
+    border: 1px solid var(--parchment-rule);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: 28px 30px 30px;
+    position: relative;
+  }
+  .folio-top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--parchment-rule); padding-bottom: 12px; margin-bottom: 20px; }
+  .folio-ref { font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--rubric); }
+  .timer { font-variant-numeric: tabular-nums; font-size: 30px; font-weight: 500; letter-spacing: .02em; }
+  .scribe {
+    min-height: 9.6em;
+    font-size: 21px;
+    line-height: 1.6;
+  }
+  .scribe .initial {
+    float: left; font-size: 3.6em; line-height: .82; margin: .06em .1em 0 0;
+    color: var(--rubric); font-weight: 600;
+  }
+  .scribe .vn { color: var(--rubric); font-size: .62em; vertical-align: super; margin: 0 .15em 0 .1em; }
+  /* Brother Quill's quill, the same drawing as in the app and og.png (tools/og-image). */
+  .pen-end { white-space: nowrap; }
+  .quill { height: 1em; width: .57em; vertical-align: baseline; overflow: visible; }
+  .quill .vf { fill: var(--quill-light); }
+  .quill .vb { fill: var(--quill-shade); }
+  .quill .vf, .quill .vb { stroke: var(--quill-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .quill .shaft { fill: none; stroke: #6b5a3e; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+  .quill .barrel { fill: #d8c9a6; stroke: #6b5a3e; stroke-width: .8; vector-effect: non-scaling-stroke; }
+  .quill .tip { fill: var(--ink); }
+  .progress { height: 4px; background: var(--parchment-rule); border-radius: 2px; margin-top: 22px; overflow: hidden; }
+  .progress > div { height: 100%; width: 0; background: var(--gold); transition: width 1s linear; }
+  .folio-note { margin: 8px 0 0; font-size: 14px; font-style: italic; color: var(--ink-soft); }
+  .folio-foot { display: flex; justify-content: space-between; margin-top: 10px; font-size: 15px; color: var(--ink-soft); }
+
+  /* Sections */
+  section { padding: 72px 0; }
+  .band { background: var(--bg-deep); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .narrow { max-width: 680px; }
+  h2 { font-size: clamp(30px, 3.6vw, 40px); font-weight: 500; line-height: 1.15; margin: 0 0 20px; }
+  .lede { font-size: 23px; margin: 0; }
+
+  .steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .steps li { border-top: 2px solid var(--ink); padding-top: 18px; }
+  .steps .num { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric); display: block; margin-bottom: 6px; }
+  .steps h3 { font-size: 25px; font-weight: 500; margin: 0 0 8px; }
+  .steps p { margin: 0; color: var(--ink-soft); font-size: 19px; }
+
+  .translations { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 32px; }
+  .tr { border: 1px solid var(--rule); background: var(--page); border-radius: 3px; padding: 20px 22px; }
+  .tr h3 { margin: 0 0 4px; font-size: 22px; font-weight: 500; }
+  .tr p { margin: 0; font-size: 17px; color: var(--ink-soft); }
+  .fine { font-size: 16px; color: var(--ink-soft); margin-top: 20px; font-style: italic; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .card-label { font-size: 14px !important; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric) !important; margin: 0 0 6px !important; }
+  .body { font-size: 20px; margin: 18px 0 0; }
+  .colophon { margin: 0 0 28px; padding: 0 0 0 22px; border-left: 2px solid var(--rubric); }
+  .colophon p { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.25; margin: 0 0 10px; font-style: italic; }
+  .colophon cite { font-size: 16px; color: var(--ink-soft); font-style: normal; }
+  .note-heading { margin-top: 56px; }
+  .promises { list-style: none; padding: 0; margin: 28px 0 0; }
+  .promises li { border-top: 1px solid var(--rule); padding: 16px 0; font-size: 20px; }
+  .promises li:last-child { border-bottom: 1px solid var(--rule); }
+  .promises strong { font-weight: 600; }
+
+  /* Waitlist */
+  #waitlist { padding-bottom: 96px; }
+  .form-shell { background: var(--page); border: 1px solid var(--rule); border-radius: 3px; padding: 28px; margin-top: 28px; box-shadow: var(--shadow); }
+  .form-placeholder { margin: 0; color: var(--ink-soft); font-style: italic; }
+  .privacy { font-size: 16px; color: var(--ink-soft); margin-top: 14px; }
+
+  footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; font-size: 16px; color: var(--ink-soft); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 860px) {
+    body { font-size: 19px; }
+    .hero { padding: 24px 0 56px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .steps, .translations, .cards { grid-template-columns: 1fr; }
+    section { padding: 56px 0; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .folio { padding: 22px 20px 24px; }
+    .scribe { font-size: 19px; min-height: 11em; }
+    .sub { font-size: 20px; }
+    .nav-cta { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn, .progress > div { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="/">Brother <span>Quill</span></a>
+    <a class="nav-cta" href="#waitlist">Join the waitlist</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">A focus timer for Catholics and Protestants</p>
+        <h1>Focus for 25 minutes. That&rsquo;s 25 minutes of Scripture, copied letter by letter.</h1>
+        <p class="sub">Whenever you need to focus, set the timer and hand the pen to Brother Quill, a monk who copies Scripture while you work. Each session adds a few more verses to your Bible, starting with the book you choose.</p>
+        <a class="btn" href="#waitlist">Join the waitlist</a>
+        <span class="launch-note">Launching on iPhone in December 2026 in the US, Canada, Australia, and New Zealand. Join before launch for a founding price.</span>
+      </div>
+
+      <div class="folio" role="img" aria-label="Preview: Brother Quill copying Genesis 1 during a focus session">
+        <div class="folio-top">
+          <span class="folio-ref">Genesis 1</span>
+          <span class="timer" id="timer" aria-hidden="true">25:00</span>
+        </div>
+        <div class="scribe" id="scribe" aria-hidden="true"></div>
+        <p class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">
+          In the beginning God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters. And God said, Let there be light: and there was light.
+        </p>
+        <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+        <div class="folio-foot" aria-hidden="true">
+          <span id="verses">0 verses copied</span>
+          <span>King James Version</span>
+        </div>
+        <p class="folio-note">Sped up here. In a real session he writes 68 characters a minute.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap narrow">
+      <h2>You picked up your phone to check one thing.</h2>
+      <p class="lede">Forty minutes later you were still holding it. Most of us know that feeling, and most of us have tried an app or two to fix it.</p>
+      <p class="body">Brother Quill is a gentler kind of timer. It doesn&rsquo;t scold you or count your screen time. It gives the time somewhere to go.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <span class="num">One</span>
+          <h3>Pick a length</h3>
+          <p>15, 25, 45, or 60 minutes. Then turn the phone face down.</p>
+        </li>
+        <li>
+          <span class="num">Two</span>
+          <h3>He writes while you work</h3>
+          <p>About 68 characters a minute, roughly as fast as a person copies by hand. The verse numbers go in red.</p>
+        </li>
+        <li>
+          <span class="num">Three</span>
+          <h3>He stops when the session ends</h3>
+          <p>If you end early, he stops even in the middle of a word. Next time, he picks up right where he stopped.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>How far a few sessions go</h2>
+      <div class="cards">
+        <div class="tr">
+          <p class="card-label">One morning</p>
+          <h3>About 14 verses</h3>
+          <p>A 25-minute session gets through nearly half of Genesis 1.</p>
+        </div>
+        <div class="tr">
+          <p class="card-label">One week</p>
+          <h3>Philippians</h3>
+          <p>One 25-minute session a day copies all four chapters in a week.</p>
+        </div>
+        <div class="tr">
+          <p class="card-label">Before Christmas</p>
+          <h3>Luke 1 and 2</h3>
+          <p>The births of John and Jesus take eight or nine sessions. Start by December 15 and he&rsquo;ll finish before Christmas Eve.</p>
+        </div>
+      </div>
+      <p class="fine">A whole Bible takes about a thousand hours, so this is a slow project. Nobody&rsquo;s rushing you.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap narrow">
+      <blockquote class="colophon">
+        <p>&ldquo;Three fingers write, but the whole body labors.&rdquo;</p>
+        <cite>A line medieval scribes often wrote at the end of a manuscript</cite>
+      </blockquote>
+      <p class="body">Before printing, every Bible was copied this way, one page at a time, for well over a thousand years. Brother Quill is a small nod to that work. He writes in a manuscript hand, or in plain type if you&rsquo;d rather, and he doesn&rsquo;t hurry.</p>
+
+      <h2 class="note-heading">Why I made Brother Quill</h2>
+      <p class="body">Most focus apps count your time in hours: 100 hours, 200 hours. I wanted to see mine as Scripture.</p>
+      <p class="body">The app does the copying. Still, as a believer, watching my work hours turn into verses and chapters helps me stay with what I&rsquo;m doing.</p>
+      <p class="body">I also think reading a Bible copied this way, a few verses after each session, means something a little different from opening the same pages anywhere else.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap narrow">
+      <h2>A few things you should know</h2>
+      <ul class="promises">
+        <li>Brother Quill is a focus timer. It shows your focus time as Scripture copied, and you can read what he&rsquo;s copied whenever you like.</li>
+        <li>There are no ads and no accounts. Your Bibles live on your iPhone, not on our servers, and they&rsquo;re included in your iPhone backup.</li>
+        <li>If you stop paying, you keep everything he&rsquo;s written. You can read it any time. He just won&rsquo;t write anything new.</li>
+        <li>It doesn&rsquo;t block other apps yet. You&rsquo;ll still need to set the phone down yourself.</li>
+        <li>We plan to add more translations after launch.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Translations at launch</h2>
+      <div class="translations">
+        <div class="tr">
+          <h3>King James Version</h3>
+          <p>Published in 1611 and still read in many churches today.</p>
+        </div>
+        <div class="tr">
+          <h3>Berean Standard Bible</h3>
+          <p>A recent translation in plain modern English.</p>
+        </div>
+        <div class="tr">
+          <h3>Douay-Rheims</h3>
+          <p>The traditional Catholic English Bible, with all 73 books.</p>
+        </div>
+        <div class="tr">
+          <h3>World English Bible, Catholic Edition</h3>
+          <p>Modern English with the full Catholic canon. It doesn&rsquo;t carry an imprimatur. We hope to add a Catholic translation with an imprimatur after launch.</p>
+        </div>
+      </div>
+      <p class="fine">Each translation is its own Bible on your shelf. You can switch between them, and each one keeps its place.</p>
+      <p class="fine">Reading something else, or in another language? Tell us in the form below.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap narrow">
+      <h2>What it costs</h2>
+      <p class="lede">Yearly: free for 7 days, then $19.99 a year.<br>Monthly: $2.99 a month, with no free trial.</p>
+      <p class="fine">Both renew automatically until you cancel in your iPhone&rsquo;s Settings. If you cancel the yearly plan during the free week, you won&rsquo;t be charged. Prices are in US dollars; in Canada, Australia, and New Zealand, the App Store shows the price in your currency.</p>
+      <p class="fine">Before you pay anything, you&rsquo;ll watch him start the book you picked.</p>
+      <p class="fine">Joined the waitlist before launch? You&rsquo;ll get a lower founding price on the yearly plan, and we won&rsquo;t raise it while you stay subscribed.</p>
+    </div>
+  </section>
+
+  <section id="waitlist">
+    <div class="wrap narrow">
+      <h2>Join the waitlist</h2>
+      <p class="lede">The app comes out in December 2026 on the App Store in the US, Canada, Australia, and New Zealand. Leave your email and we&rsquo;ll write when it&rsquo;s ready.</p>
+      <p class="body">Everyone who joins before launch becomes a founding member. You&rsquo;ll get a lower yearly price, and we won&rsquo;t raise it while you stay subscribed. You&rsquo;ll also get a code to share with friends who are new to Brother Quill, so they save on their first year.</p>
+      <div class="form-shell" id="form-shell">
+        <p class="form-placeholder" id="form-placeholder">The waitlist form opens soon.</p>
+      </div>
+      <p class="privacy">We&rsquo;ll only email you about Brother Quill, and you can unsubscribe any time.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Strength Theory, LLC &middot; <a href="/privacy">Privacy policy</a></span>
+    <span>Scripture quotations from the King James Version (public domain outside the UK).</span>
+  </div>
+</footer>
+
+<script>
+  // Waitlist form (Tally).
+  var TALLY_FORM_ID = "OQX1D7";
+
+  (function loadTally() {
+    if (!TALLY_FORM_ID || TALLY_FORM_ID === "REPLACE_ME") return;
+    var shell = document.getElementById("form-shell");
+    shell.innerHTML =
+      '<iframe data-tally-src="https://tally.so/embed/' + TALLY_FORM_ID +
+      '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"' +
+      ' loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0"' +
+      ' title="Brother Quill waitlist"></iframe>';
+    var s = document.createElement("script");
+    s.src = "https://tally.so/widgets/embed.js";
+    s.async = true;
+    var fallback = function () {
+      if (typeof Tally !== "undefined") { Tally.loadEmbeds(); return; }
+      document.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+        e.src = e.dataset.tallySrc;
+      });
+    };
+    s.onload = fallback; s.onerror = fallback;
+    document.body.appendChild(s);
+  })();
+
+  /* ---- Manuscript demo ---- */
+  (function scribeDemo() {
+    var verses = [
+      "In the beginning God created the heaven and the earth.",
+      "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.",
+      "And God said, Let there be light: and there was light."
+    ];
+    var scribe = document.getElementById("scribe");
+    var timerEl = document.getElementById("timer");
+    var bar = document.getElementById("bar");
+    var versesEl = document.getElementById("verses");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function esc(t) { return t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+    // The quill sits right after the last letter, kept on the same line as it.
+    var QUILL = '<svg class="quill" viewBox="0 -230.4 131.2 230.4" aria-hidden="true"><g transform="rotate(28)">' +
+      '<path class="vb" d="M0,-74 C-14,-110 -20,-170 -6,-232 C-3,-244 0,-252 2,-262 C-2,-200 -3,-130 0,-74 Z"/>' +
+      '<path class="vf" d="M0,-70 C26,-104 40,-170 22,-238 C14,-252 6,-258 2,-262 C-4,-200 -6,-130 0,-70 Z"/>' +
+      '<path class="shaft" d="M0,-2 C-1,-60 0,-180 2,-262"/>' +
+      '<path class="barrel" d="M0,0 L-5,-16 C-6,-40 -5,-62 -4,-74 L4,-74 C5,-62 6,-40 5,-16 Z"/>' +
+      '<path class="tip" d="M0,0 L-4,-13 L4,-13 Z"/></g></svg>';
+
+    function render(vIdx, cIdx, showQuill) {
+      var html = "";
+      for (var i = 0; i <= vIdx && i < verses.length; i++) {
+        var text = i < vIdx ? verses[i] : verses[i].slice(0, cIdx);
+        var last = showQuill && i === vIdx;
+        if (i === 0) {
+          var rest = text.slice(1);
+          html += '<span class="initial">' + esc(text.charAt(0) || "I") + "</span>";
+          html += last && rest ? esc(rest.slice(0, -1)) + '<span class="pen-end">' + esc(rest.slice(-1)) + QUILL + "</span>"
+                               : esc(rest) + (last ? QUILL : "");
+        } else {
+          html += ' <span class="vn">' + (i + 1) + "</span>";
+          html += last && text ? esc(text.slice(0, -1)) + '<span class="pen-end">' + esc(text.slice(-1)) + QUILL + "</span>"
+                               : esc(text) + (last ? QUILL : "");
+        }
+      }
+      scribe.innerHTML = html;
+    }
+
+    function setVerses(n) { versesEl.textContent = n + (n === 1 ? " verse" : " verses") + " copied"; }
+
+    // The clock follows the writing: each character is 60/68 of a second of session time,
+    // so the demo shows the real pace, sped up.
+    var total = 25 * 60, perChar = 60 / 68, typed = 0;
+    function setClock() {
+      var elapsed = Math.round(typed * perChar), remaining = Math.max(0, total - elapsed);
+      var m = Math.floor(remaining / 60), s = remaining % 60;
+      timerEl.textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+      bar.style.width = (elapsed / total * 100).toFixed(2) + "%";
+    }
+
+    if (reduce) {
+      render(verses.length - 1, verses[verses.length - 1].length, true);
+      typed = verses.join("").length;
+      setClock();
+      setVerses(3);
+      return;
+    }
+
+    // Plays once, then rests on the finished page.
+    var v = 0, c = 0;
+    function tick() {
+      if (v >= verses.length) { render(verses.length - 1, verses[verses.length - 1].length, true); return; }
+      c++; typed++;
+      render(v, c, true);
+      setClock();
+      if (c >= verses[v].length) {
+        setVerses(v + 1);
+        v++; c = 0;
+        setTimeout(tick, 900);
+      } else {
+        var ch = verses[v].charAt(c - 1);
+        setTimeout(tick, /[.,;:]/.test(ch) ? 260 : 55 + Math.random() * 45);
+      }
+    }
+    render(0, 0, true);
+    setTimeout(tick, 600);
+  })();
+</script>
+</body>
+</html>
