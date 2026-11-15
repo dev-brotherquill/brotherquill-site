@@ -446,6 +446,15 @@
     };
     s.onload = fallback; s.onerror = fallback;
     document.body.appendChild(s);
+
+    // After submitting, the long form shrinks to a short thank-you message, which can end up
+    // above the screen. Bring it back into view.
+    window.addEventListener("message", function (e) {
+      if (e.origin !== "https://tally.so" || typeof e.data !== "string") return;
+      if (e.data.indexOf("Tally.FormSubmitted") === -1) return;
+      var show = function () { shell.scrollIntoView({ behavior: "smooth", block: "center" }); };
+      show(); setTimeout(show, 400);
+    });
   })();
 
   /* ---- Manuscript demo ---- */
