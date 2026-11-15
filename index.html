@@ -217,8 +217,9 @@
 
   /* Waitlist */
   #waitlist { padding-bottom: 96px; }
-  .form-shell { background: var(--page); border: 1px solid var(--rule); border-radius: 3px; padding: 28px; margin-top: 28px; box-shadow: var(--shadow); }
-  .form-placeholder { margin: 0; color: var(--ink-soft); font-style: italic; }
+  /* Tally's form colors can't follow dark mode, so the form sits on a light card in both modes. */
+  .form-shell { background: #fffdf9; color-scheme: light; border: 1px solid var(--rule); border-radius: 3px; padding: 28px; margin-top: 28px; box-shadow: var(--shadow); }
+  .form-placeholder { margin: 0; color: #5e554a; font-style: italic; }
   .privacy { font-size: 16px; color: var(--ink-soft); margin-top: 14px; }
 
   footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; font-size: 16px; color: var(--ink-soft); }
