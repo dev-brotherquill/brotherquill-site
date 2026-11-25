@@ -437,10 +437,27 @@
 
   (function loadTally() {
     if (!TALLY_FORM_ID || TALLY_FORM_ID === "REPLACE_ME") return;
+
+    // Which of our channel links brought the visitor (brotherquill.com/?ref=ig). It goes into the
+    // form's hidden "ref" field, so a signup records where it came from. Then it's dropped from the
+    // address bar, so a copied link doesn't credit the same channel again.
+    var ref = "";
+    try {
+      var params = new URLSearchParams(location.search);
+      ref = (params.get("ref") || "").toLowerCase();
+      if (!/^[a-z0-9-]{1,24}$/.test(ref)) ref = "";
+      if (params.has("ref")) {
+        params.delete("ref");
+        var rest = params.toString();
+        history.replaceState(null, "", location.pathname + (rest ? "?" + rest : "") + location.hash);
+      }
+    } catch (e) { ref = ""; }
+
     var shell = document.getElementById("form-shell");
     shell.innerHTML =
       '<iframe data-tally-src="https://tally.so/embed/' + TALLY_FORM_ID +
-      '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"' +
+      '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1' +
+      (ref ? '&ref=' + ref : '') + '"' +
       ' loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0"' +
       ' title="Brother Quill waitlist"></iframe>';
     var s = document.createElement("script");
