@@ -162,7 +162,7 @@
   .hero-copy { grid-area: copy; align-self: end; }
   .hero-cta { grid-area: cta; align-self: start; }
   .hero .folio { grid-area: folio; align-self: center; }
-  .eyebrow { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric); margin: 0 0 18px; font-weight: 500; }
+  .eyebrow { font-size: 17px; letter-spacing: .02em; color: var(--rubric); margin: 0 0 18px; font-weight: 500; }
   h1 { font-size: clamp(38px, 5.2vw, 58px); line-height: 1.08; font-weight: 500; margin: 0 0 22px; letter-spacing: -.01em; }
   .sub { font-size: 22px; color: var(--ink-soft); margin: 0 0 32px; max-width: 30em; }
   .btn {
@@ -173,7 +173,6 @@
   }
   .btn:hover { background: var(--rubric); transform: translateY(-1px); }
   /* Apple's capitalization stays even inside all-caps labels. */
-  .keep-case { text-transform: none; }
   .nowrap { white-space: nowrap; }
   .launch-note { display: block; margin-top: 14px; font-size: 16px; color: var(--ink-soft); font-style: italic; }
 
@@ -237,7 +236,6 @@
   .colophon p { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.25; margin: 0 0 10px; font-style: italic; }
   .colophon-inline { margin: 24px 0; }
   .colophon cite { font-size: 16px; color: var(--ink-soft); font-style: normal; }
-  .note-heading { margin-top: 56px; }
   h3.sub-heading { font-size: 26px; font-weight: 500; margin: 48px 0 0; }
   .closing { margin: 28px 0 0; font-size: 1em; }
   .signature { font-family: "Sacramento", cursive; font-size: 46px; line-height: 1.2; margin: 16px 0 0; }
@@ -291,7 +289,7 @@
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <p class="eyebrow">For Catholics and Protestants &middot; <span class="nowrap"><span class="keep-case">iPhone</span>, December 2026</span></p>
+        <p class="eyebrow">For Catholics and Protestants &middot; <span class="nowrap">iPhone, December 2026</span></p>
         <h1>Brother Quill is a focus timer that keeps you company.</h1>
         <p class="sub">Set the timer and get to work. While it runs, a monk copies Scripture on your screen, letter by letter. When it ends, you&rsquo;ve done the work, and a few more verses are in your Bible.</p>
       </div>
@@ -361,8 +359,12 @@
       <p class="body">Brother Quill is meant to be that person at the distant table.</p>
       <p class="body">While I work, he copies Scripture. Knowing that, I work with a little more reverence. It feels like being held close to God, and that helps me stay with it.</p>
       <p class="signature">Derek</p>
+    </div>
+  </section>
 
-      <h2 class="note-heading">Why a monk</h2>
+  <section>
+    <div class="wrap narrow">
+      <h2>Why a monk</h2>
       <p class="body">Before printing, Bibles were copied by hand, one page at a time, for more than a thousand years. In many monasteries, the monks did it in one room, each at his own desk, working in silence. At the end of a manuscript, scribes often left a line like this one:</p>
       <blockquote class="colophon colophon-inline">
         <p>&ldquo;Three fingers write, but the whole body labors.&rdquo;</p>
@@ -370,7 +372,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="band">
     <div class="wrap narrow">
       <h2>A few things you should know</h2>
       <ul class="promises">
@@ -412,7 +414,7 @@
     </div>
   </section>
 
-  <section id="waitlist" class="band">
+  <section id="waitlist">
     <div class="wrap narrow">
       <h2>Join the waitlist</h2>
       <p class="lede">Brother Quill comes out on iPhone in December 2026, in the US, Canada, Australia, and New Zealand. Leave your email and we&rsquo;ll write the day it&rsquo;s out.</p>
