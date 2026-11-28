@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brother Quill — A focus timer for Christians</title>
-<meta name="description" content="Brother Quill is an iPhone focus timer for Christians. While you focus, a monk copies Scripture letter by letter, adding a few verses to your Bible each session. Launching December 2026.">
+<meta name="description" content="Brother Quill is an iPhone focus timer for Christians. While you work, a monk copies Scripture beside you letter by letter, adding a few verses to your Bible each session. Launching December 2026.">
 <link rel="canonical" href="https://brotherquill.com/">
 <meta name="google-site-verification" content="zHI4tAQBiQefYw-1FF3VX_wEEcUnIoUnZkJK0v2IKB4">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://brotherquill.com/">
 <meta property="og:title" content="Brother Quill — A focus timer for Christians">
-<meta property="og:description" content="Focus for 25 minutes. Your focus time adds up, verse by verse. Join the waitlist.">
+<meta property="og:description" content="Brother Quill is a focus timer that keeps you company. Join the waitlist.">
 <meta property="og:image" content="https://brotherquill.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
    "@type": "MobileApplication",
    "name": "Brother Quill",
    "url": "https://brotherquill.com/",
-   "description": "An iPhone focus timer for Christians. While you focus, a monk copies Scripture letter by letter at 68 characters a minute, adding a few verses to your Bible each session.",
+   "description": "An iPhone focus timer for Christians. While you work, a monk copies Scripture beside you letter by letter at 68 characters a minute, adding a few verses to your Bible each session.",
    "operatingSystem": "iOS",
    "applicationCategory": "ProductivityApplication",
    "inLanguage": "en",
@@ -78,6 +78,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<!-- The maker's signature. text=Derek loads only those five letters (about 3 KB). -->
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&text=Derek&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #fbf9f4;
@@ -133,16 +135,33 @@
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
   /* Header */
-  header { padding: 22px 0; }
+  /* The header stays on screen while scrolling, so "Join the waitlist" is always one tap away. */
+  header {
+    position: sticky; top: 0; z-index: 10; padding: 14px 0;
+    background: var(--bg); border-bottom: 1px solid transparent; transition: border-color .2s ease;
+  }
+  header.scrolled { border-bottom-color: var(--rule); }
   header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  section[id] { scroll-margin-top: 72px; }
   .wordmark { font-size: 24px; font-weight: 600; letter-spacing: .02em; text-decoration: none; }
   .wordmark span { color: var(--rubric); }
-  .nav-cta { font-size: 17px; text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
-  .nav-cta:hover { border-color: var(--ink); }
+  .nav-cta {
+    font-size: 17px; font-weight: 500; text-decoration: none; white-space: nowrap;
+    background: var(--ink); color: var(--btn-text); padding: 8px 16px; border-radius: 4px;
+    transition: background .15s ease;
+  }
+  .nav-cta:hover { background: var(--rubric); }
 
   /* Hero */
   .hero { padding: 48px 0 72px; }
-  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  /* On phones the quill comes right after the headline, before the button, so it's on the first screen. */
+  .hero .wrap {
+    display: grid; grid-template-columns: 1.05fr 1fr; column-gap: 56px; row-gap: 0;
+    grid-template-areas: "copy folio" "cta folio";
+  }
+  .hero-copy { grid-area: copy; align-self: end; }
+  .hero-cta { grid-area: cta; align-self: start; }
+  .hero .folio { grid-area: folio; align-self: center; }
   .eyebrow { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric); margin: 0 0 18px; font-weight: 500; }
   h1 { font-size: clamp(38px, 5.2vw, 58px); line-height: 1.08; font-weight: 500; margin: 0 0 22px; letter-spacing: -.01em; }
   .sub { font-size: 22px; color: var(--ink-soft); margin: 0 0 32px; max-width: 30em; }
@@ -153,6 +172,9 @@
     transition: transform .15s ease, background .15s ease;
   }
   .btn:hover { background: var(--rubric); transform: translateY(-1px); }
+  /* Apple's capitalization stays even inside all-caps labels. */
+  .keep-case { text-transform: none; }
+  .nowrap { white-space: nowrap; }
   .launch-note { display: block; margin-top: 14px; font-size: 16px; color: var(--ink-soft); font-style: italic; }
 
   /* Manuscript demo */
@@ -196,28 +218,31 @@
   .band { background: var(--bg-deep); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
   .narrow { max-width: 680px; }
   h2 { font-size: clamp(30px, 3.6vw, 40px); font-weight: 500; line-height: 1.15; margin: 0 0 20px; }
-  .lede { font-size: 23px; margin: 0; }
+  /* Every paragraph on the page reads at the body size (20px, 19px on phones). */
+  .lede { font-size: 1em; margin: 0; }
 
   .steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .steps li { border-top: 2px solid var(--ink); padding-top: 18px; }
   .steps .num { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric); display: block; margin-bottom: 6px; }
   .steps h3 { font-size: 25px; font-weight: 500; margin: 0 0 8px; }
-  .steps p { margin: 0; color: var(--ink-soft); font-size: 19px; }
+  .steps p { margin: 0; color: var(--ink-soft); font-size: 1em; }
 
   .translations { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 32px; }
   .tr { border: 1px solid var(--rule); background: var(--page); border-radius: 3px; padding: 20px 22px; }
   .tr h3 { margin: 0 0 4px; font-size: 22px; font-weight: 500; }
-  .tr p { margin: 0; font-size: 17px; color: var(--ink-soft); }
-  .fine { font-size: 16px; color: var(--ink-soft); margin-top: 20px; font-style: italic; }
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
-  .card-label { font-size: 14px !important; letter-spacing: .14em; text-transform: uppercase; color: var(--rubric) !important; margin: 0 0 6px !important; }
-  .body { font-size: 20px; margin: 18px 0 0; }
+  .tr p { margin: 0; font-size: 1em; color: var(--ink-soft); }
+  .fine { font-size: 1em; color: var(--ink-soft); margin: 18px 0 0; }
+  .body { font-size: 1em; margin: 18px 0 0; }
   .colophon { margin: 0 0 28px; padding: 0 0 0 22px; border-left: 2px solid var(--rubric); }
   .colophon p { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.25; margin: 0 0 10px; font-style: italic; }
+  .colophon-inline { margin: 24px 0; }
   .colophon cite { font-size: 16px; color: var(--ink-soft); font-style: normal; }
   .note-heading { margin-top: 56px; }
+  h3.sub-heading { font-size: 26px; font-weight: 500; margin: 48px 0 0; }
+  .closing { margin: 28px 0 0; font-size: 1em; }
+  .signature { font-family: "Sacramento", cursive; font-size: 46px; line-height: 1.2; margin: 16px 0 0; }
   .promises { list-style: none; padding: 0; margin: 28px 0 0; }
-  .promises li { border-top: 1px solid var(--rule); padding: 16px 0; font-size: 20px; }
+  .promises li { border-top: 1px solid var(--rule); padding: 16px 0; font-size: 1em; }
   .promises li:last-child { border-bottom: 1px solid var(--rule); }
   .promises strong { font-weight: 600; }
 
@@ -226,7 +251,7 @@
   /* Tally's form colors can't follow dark mode, so the form sits on a light card in both modes. */
   .form-shell { background: #fffdf9; color-scheme: light; border: 1px solid var(--rule); border-radius: 3px; padding: 28px; margin-top: 28px; box-shadow: var(--shadow); }
   .form-placeholder { margin: 0; color: #5e554a; font-style: italic; }
-  .privacy { font-size: 16px; color: var(--ink-soft); margin-top: 14px; }
+  .privacy { font-size: 1em; color: var(--ink-soft); margin-top: 14px; }
 
   footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; font-size: 16px; color: var(--ink-soft); }
   footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
@@ -234,8 +259,9 @@
   @media (max-width: 860px) {
     body { font-size: 19px; }
     .hero { padding: 24px 0 56px; }
-    .hero .wrap { grid-template-columns: 1fr; gap: 40px; }
-    .steps, .translations, .cards { grid-template-columns: 1fr; }
+    .hero .wrap { grid-template-columns: 1fr; grid-template-areas: "copy" "folio" "cta"; row-gap: 28px; }
+    .hero .sub { margin-bottom: 0; }
+    .steps, .translations { grid-template-columns: 1fr; }
     section { padding: 56px 0; }
   }
   @media (max-width: 480px) {
@@ -243,11 +269,12 @@
     .folio { padding: 22px 20px 24px; }
     .scribe { font-size: 19px; min-height: 11em; }
     .sub { font-size: 20px; }
-    .nav-cta { display: none; }
+    .wordmark { font-size: 21px; }
+    .nav-cta { font-size: 15px; padding: 7px 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .btn, .progress > div { transition: none; }
+    .btn, .nav-cta, header, .progress > div { transition: none; }
   }
 </style>
 </head>
@@ -263,12 +290,10 @@
 <main>
   <section class="hero">
     <div class="wrap">
-      <div>
-        <p class="eyebrow">A focus timer for Catholics and Protestants</p>
-        <h1>Focus for 25 minutes. Your focus time adds up, verse by verse.</h1>
-        <p class="sub">Whenever you need to focus, set the timer and hand the pen to Brother Quill, a monk who copies Scripture letter by letter while you work. Each session adds a few more verses to your Bible, starting with the book you choose.</p>
-        <a class="btn" href="#waitlist">Join the waitlist</a>
-        <span class="launch-note">Launching on iPhone in December 2026 in the US, Canada, Australia, and New Zealand. Join before launch for a founding price.</span>
+      <div class="hero-copy">
+        <p class="eyebrow">For Catholics and Protestants &middot; <span class="nowrap"><span class="keep-case">iPhone</span>, December 2026</span></p>
+        <h1>Brother Quill is a focus timer that keeps you company.</h1>
+        <p class="sub">Set the timer and get to work. While it runs, a monk copies Scripture on your screen, letter by letter. When it ends, you&rsquo;ve done the work, and a few more verses are in your Bible.</p>
       </div>
 
       <div class="folio" role="img" aria-label="Preview: Brother Quill copying Genesis 1 during a focus session">
@@ -285,16 +310,22 @@
           <span id="verses">0 verses copied</span>
           <span>King James Version</span>
         </div>
-        <p class="folio-note">Sped up here. In a real session he writes 68 characters a minute.</p>
+        <p class="folio-note">This preview is sped up. In a real session he writes about 68 characters a minute, about as fast as a person copying by hand.</p>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn" href="#waitlist">Join the waitlist</a>
+        <span class="launch-note">Everyone on the waitlist becomes a founding member.</span>
       </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap narrow">
-      <h2>You picked up your phone to check one thing.</h2>
-      <p class="lede">Forty minutes later you were still holding it. Most of us know that feeling, and most of us have tried an app or two to fix it.</p>
-      <p class="body">Brother Quill is a gentler kind of timer. It gives your time somewhere to go.</p>
+      <h2>It&rsquo;s hard to stay with one thing for long.</h2>
+      <p class="lede">A paper due Monday. A report you&rsquo;ve opened three times today. You know what to do next, and your hand still goes to your phone.</p>
+      <p class="body">It&rsquo;s easier to stay in the chair when you aren&rsquo;t the only one working. That&rsquo;s why some people get more done at the office than at home, and why some put on study-with-me videos.</p>
+      <p class="body">Brother Quill keeps you company the same way. While you work, he copies Scripture on your phone.</p>
     </div>
   </section>
 
@@ -304,82 +335,57 @@
       <ol class="steps">
         <li>
           <span class="num">One</span>
-          <h3>Pick a length</h3>
-          <p>When you need to focus, open Brother Quill and choose 15, 25, 45, or 60 minutes.</p>
+          <h3>Choose a book and a length</h3>
+          <p>The first time, pick a Bible and the book he starts with. After that, choose 15, 25, 45, or 60 minutes each time.</p>
         </li>
         <li>
           <span class="num">Two</span>
           <h3>Get to work</h3>
-          <p>You focus on your work, and your focus time adds up, verse by verse, at about 68 characters a minute. That&rsquo;s roughly as fast as a person copies by hand. The verse numbers go in red.</p>
+          <p>Stand your phone up next to your work, where you can see him writing. Leave it there until the timer ends. Every minute you work, he copies about a dozen words. If you switch apps, the session keeps going, and your Lock Screen shows the time left and the verse he&rsquo;s on.</p>
         </li>
         <li>
           <span class="num">Three</span>
-          <h3>Come back next time</h3>
-          <p>When your time is up, or you stop the timer yourself, the copying stops. The verses stay in your Bible, and next time you pick up right where you left off.</p>
+          <h3>Take a break</h3>
+          <p>When time&rsquo;s up, or when you stop the timer, he stops too. The verses he copied stay in your Bible, and next session he picks up where he left off.</p>
         </li>
       </ol>
+      <p class="body">Say you spend two hours on a report and get it done. That night, open your Bible and read the verses he copied while you wrote it.</p>
     </div>
   </section>
 
   <section class="band">
-    <div class="wrap">
-      <h2>How far your focus goes</h2>
-      <div class="cards">
-        <div class="tr">
-          <p class="card-label">One morning</p>
-          <h3>About 14 verses</h3>
-          <p>A 25-minute session gets through nearly half of Genesis 1.</p>
-        </div>
-        <div class="tr">
-          <p class="card-label">One week</p>
-          <h3>Philippians</h3>
-          <p>One 25-minute session a day copies all four chapters in a week.</p>
-        </div>
-        <div class="tr">
-          <p class="card-label">Before Christmas</p>
-          <h3>Luke 1 and 2</h3>
-          <p>The births of John and Jesus take eight or nine sessions. Start by December 15 and they&rsquo;ll be in your Bible by Christmas Eve.</p>
-        </div>
-      </div>
-      <p class="fine">A whole Bible takes about a thousand hours, so this is a slow project. Nobody&rsquo;s rushing you.</p>
+    <div class="wrap narrow">
+      <h2>Why I made Brother Quill</h2>
+      <p class="body">I focus best when the work is something I enjoy thinking about, or when there&rsquo;s a deadline I can&rsquo;t miss.</p>
+      <p class="body">The room also has to be quiet. No music, no white noise. And someone else focused on their own work, like the one person at a distant table in a nearly empty library, helps just by being there. I lean on them without noticing.</p>
+      <p class="body">Brother Quill is meant to be that person at the distant table.</p>
+      <p class="body">While I work, he copies Scripture. Knowing that, I work with a little more reverence. It feels like being held close to God, and that helps me stay with it.</p>
+      <p class="signature">Derek</p>
+
+      <h2 class="note-heading">Why a monk</h2>
+      <p class="body">Before printing, Bibles were copied by hand, one page at a time, for more than a thousand years. In many monasteries, the monks did it in one room, each at his own desk, working in silence. At the end of a manuscript, scribes often left a line like this one:</p>
+      <blockquote class="colophon colophon-inline">
+        <p>&ldquo;Three fingers write, but the whole body labors.&rdquo;</p>
+      </blockquote>
     </div>
   </section>
 
   <section>
-    <div class="wrap narrow">
-      <blockquote class="colophon">
-        <p>&ldquo;Three fingers write, but the whole body labors.&rdquo;</p>
-        <cite>A line medieval scribes often wrote at the end of a manuscript</cite>
-      </blockquote>
-      <p class="body">Before printing, every Bible was copied this way, one page at a time, for well over a thousand years. Brother Quill is a small nod to that work. He writes in a manuscript hand, or in plain type if you&rsquo;d rather, and he doesn&rsquo;t hurry.</p>
-
-      <h2 class="note-heading">Why I made Brother Quill</h2>
-      <p class="body">Most focus apps count your time in hours: 100 hours, 200 hours. I wanted to see mine as Scripture.</p>
-      <p class="body">The app does the copying. Still, as a believer, watching my work hours turn into verses and chapters helps me stay with what I&rsquo;m doing.</p>
-      <p class="body">I also think reading a Bible copied this way, a few verses after each session, means something a little different from opening the same pages anywhere else.</p>
-    </div>
-  </section>
-
-  <section class="band">
     <div class="wrap narrow">
       <h2>A few things you should know</h2>
       <ul class="promises">
-        <li>Brother Quill is a focus timer. It shows your focus time as Scripture copied, and you can read what he&rsquo;s copied whenever you like.</li>
-        <li>There are no ads and no accounts. Your Bibles live on your iPhone, not on our servers, and they&rsquo;re included in your iPhone backup.</li>
-        <li>If you stop paying, you keep everything he&rsquo;s written. You can read it any time. He just won&rsquo;t write anything new.</li>
-        <li>It doesn&rsquo;t block other apps yet. You&rsquo;ll still need to set the phone down yourself.</li>
-        <li>We plan to add more translations after launch.</li>
+        <li>It&rsquo;s a focus timer first. You can read what he&rsquo;s copied any time, in the app.</li>
+        <li>No ads, no accounts. Your Bibles are stored on your iPhone, not on our servers, and your iPhone backup includes them.</li>
+        <li>It doesn&rsquo;t block other apps yet.</li>
+        <li>He writes in a manuscript style, or in plain type if you prefer.</li>
+        <li>He writes without a sound. When the time is up, you get one notification.</li>
       </ul>
-    </div>
-  </section>
 
-  <section>
-    <div class="wrap">
-      <h2>Translations at launch</h2>
+      <h3 class="sub-heading">Bibles at launch</h3>
       <div class="translations">
         <div class="tr">
           <h3>King James Version</h3>
-          <p>Published in 1611 and still read in many churches today.</p>
+          <p>The 1611 translation many churches still read.</p>
         </div>
         <div class="tr">
           <h3>Berean Standard Bible</h3>
@@ -394,31 +400,29 @@
           <p>Modern English with the full Catholic canon. It doesn&rsquo;t carry an imprimatur. We hope to add a Catholic translation with an imprimatur after launch.</p>
         </div>
       </div>
-      <p class="fine">Each translation is its own Bible on your shelf. You can switch between them, and each one keeps its place.</p>
-      <p class="fine">Reading something else, or in another language? Tell us in the form below.</p>
-    </div>
-  </section>
+      <p class="fine">Each translation is a separate Bible in the app, and each keeps its own place. You can switch between them. We plan to add more translations after launch.</p>
+      <p class="fine">Reading something else, or in another language? Tell us after you join.</p>
 
-  <section class="band">
-    <div class="wrap narrow">
-      <h2>What it costs</h2>
-      <p class="lede">Yearly: free for 7 days, then $19.99 a year.<br>Monthly: $2.99 a month, with no free trial.</p>
+      <h3 class="sub-heading">What it costs</h3>
+      <p class="body">Yearly: free for 7 days, then $19.99 a year.<br>Monthly: $2.99 a month, with no free trial.</p>
       <p class="fine">US prices. The App Store shows your local price.</p>
       <p class="fine">Both renew automatically until you cancel in your iPhone&rsquo;s Settings. If you cancel the yearly plan during the free week, you won&rsquo;t be charged.</p>
       <p class="fine">Before you pay anything, you&rsquo;ll watch him start the book you picked.</p>
-      <p class="fine">Joined the waitlist before launch? You&rsquo;ll get a lower founding price on the yearly plan, and we won&rsquo;t raise it while you stay subscribed.</p>
+      <p class="fine">If you stop paying, you keep everything he&rsquo;s written and can read it any time. He just won&rsquo;t write anything new.</p>
     </div>
   </section>
 
-  <section id="waitlist">
+  <section id="waitlist" class="band">
     <div class="wrap narrow">
       <h2>Join the waitlist</h2>
-      <p class="lede">The app comes out in December 2026 on the App Store in the US, Canada, Australia, and New Zealand. Leave your email and we&rsquo;ll write when it&rsquo;s ready.</p>
+      <p class="lede">Brother Quill comes out on iPhone in December 2026, in the US, Canada, Australia, and New Zealand. Leave your email and we&rsquo;ll write the day it&rsquo;s out.</p>
       <p class="body">Everyone who joins before launch becomes a founding member. You&rsquo;ll get a lower yearly price, and we won&rsquo;t raise it while you stay subscribed. You&rsquo;ll also get a code to share with friends who are new to Brother Quill, so they save on their first year.</p>
+      <p class="body">Only your email is required.</p>
       <div class="form-shell" id="form-shell">
         <p class="form-placeholder" id="form-placeholder">The waitlist form opens soon.</p>
       </div>
       <p class="privacy">We&rsquo;ll only email you about Brother Quill, and you can unsubscribe any time.</p>
+      <p class="closing">Until then, God bless your work.</p>
     </div>
   </section>
 </main>
@@ -432,8 +436,11 @@
 </footer>
 
 <script>
-  // Waitlist form (Tally).
+  // Waitlist form (Tally), in two steps. Step 1 takes only the email, so the signup is saved the
+  // moment it's sent. Step 2 asks four optional questions in a second form, linked to the signup
+  // by its Tally submission ID (no email in the address).
   var TALLY_FORM_ID = "OQX1D7";
+  var TALLY_STEP2_ID = "aOdAev";
 
   (function loadTally() {
     if (!TALLY_FORM_ID || TALLY_FORM_ID === "REPLACE_ME") return;
@@ -454,32 +461,50 @@
     } catch (e) { ref = ""; }
 
     var shell = document.getElementById("form-shell");
-    shell.innerHTML =
-      '<iframe data-tally-src="https://tally.so/embed/' + TALLY_FORM_ID +
-      '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1' +
-      (ref ? '&ref=' + ref : '') + '"' +
-      ' loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0"' +
-      ' title="Brother Quill waitlist"></iframe>';
-    var s = document.createElement("script");
-    s.src = "https://tally.so/widgets/embed.js";
-    s.async = true;
-    var fallback = function () {
+    var step = 1;
+    var load = function () {
       if (typeof Tally !== "undefined") { Tally.loadEmbeds(); return; }
       document.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
         e.src = e.dataset.tallySrc;
       });
     };
-    s.onload = fallback; s.onerror = fallback;
+    var embed = function (id, extra) {
+      shell.innerHTML =
+        '<iframe data-tally-src="https://tally.so/embed/' + id +
+        '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1' + extra + '"' +
+        ' loading="lazy" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0"' +
+        ' title="Brother Quill waitlist"></iframe>';
+    };
+    embed(TALLY_FORM_ID, ref ? "&ref=" + ref : "");
+    var s = document.createElement("script");
+    s.src = "https://tally.so/widgets/embed.js";
+    s.async = true;
+    s.onload = load; s.onerror = load;
     document.body.appendChild(s);
 
-    // After submitting, the long form shrinks to a short thank-you message, which can end up
-    // above the screen. Bring it back into view.
+    // When step 1 is sent, swap in step 2. After either step, keep the form in view, since its
+    // height changes.
     window.addEventListener("message", function (e) {
       if (e.origin !== "https://tally.so" || typeof e.data !== "string") return;
       if (e.data.indexOf("Tally.FormSubmitted") === -1) return;
+      var p = {};
+      try { p = JSON.parse(e.data).payload || {}; } catch (err) {}
+      if (step === 1 && (!p.formId || p.formId === TALLY_FORM_ID)) {
+        step = 2;
+        var sid = /^[A-Za-z0-9]{1,40}$/.test(p.id || "") ? p.id : "";
+        embed(TALLY_STEP2_ID, (sid ? "&sid=" + sid : "") + (ref ? "&ref=" + ref : ""));
+        load();
+      }
       var show = function () { shell.scrollIntoView({ behavior: "smooth", block: "center" }); };
       show(); setTimeout(show, 400);
     });
+  })();
+
+  // A thin line under the header once the page scrolls.
+  (function headerLine() {
+    var h = document.querySelector("header");
+    var set = function () { h.classList.toggle("scrolled", window.scrollY > 4); };
+    window.addEventListener("scroll", set, { passive: true }); set();
   })();
 
   /* ---- Manuscript demo ---- */
@@ -560,8 +585,16 @@
         setTimeout(tick, /[.,;:]/.test(ch) ? 260 : 55 + Math.random() * 45);
       }
     }
+    // Start when the page is in view, so a visitor sees him begin with the first letter.
     render(0, 0, true);
-    setTimeout(tick, 600);
+    var started = false;
+    function start() { if (started) return; started = true; setTimeout(tick, 600); }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); start(); }
+      }, { threshold: 0.4 });
+      io.observe(scribe);
+    } else { start(); }
   })();
 </script>
 </body>
